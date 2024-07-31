@@ -1,0 +1,215 @@
+<div *ngIf="isLoading; else elseBlock" class="flex items-center justify-center h-[80vh]">
+  <div role="status">
+    <svg aria-hidden="true" class="inline w-20 h-20 mr-2 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101"
+      fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+        fill="currentColor" />
+      <path
+        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+        fill="currentFill" />
+    </svg>
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <!-- Alert -->
+  <div class="alert {{ alertType }} shadow-lg z-50 top-[85px] right-2 fixed w-fit" *ngIf="alert" (click)="resetAlert()">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 stroke-current" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+
+      <span>{{ alertMessage }}</span>
+    </div>
+  </div>
+
+  <div class="customTitle">
+    <h1>Material</h1>
+  </div>
+  <div class="flex justify-between">
+    <div class="flex items-center md:w-1/4 max-sm:w-1/2">
+      <label for="simple-search" class="sr-only">Search</label>
+      <div class="relative w-full">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <input type="text" id="simple-search"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#3E54AC] focus:border-[#3E54AC] block w-full pl-10 p-2.5 focus:outline-none focus:ring-1"
+          placeholder="Search" [(ngModel)]="term" />
+      </div>
+    </div>
+    <div *ngIf="isAllowed">
+      <a *ngIf="user.isEmployee" routerLink="/material/Create"
+        class="btn capitalize bg-[#F45050] border-0 hover:bg-[#e03333]">+ Create</a>
+    </div>
+  </div>
+  <div class="mt-3 overflow-x-auto">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th class="bg-[#068DA9] text-white text-center">No</th>
+          <th class="bg-[#068DA9] text-white text-center">Name</th>
+          <th class="bg-[#068DA9] text-white text-center">Manufacture</th>
+          <th class="bg-[#068DA9] text-white text-center">Lot Number</th>
+          <th class="bg-[#068DA9] text-white text-center">Expired Date</th>
+          <th class="bg-[#068DA9] text-white text-center">Quantity (Kg)</th>
+          <th class="bg-[#068DA9] text-white text-center">Storage</th>
+          <th class="bg-[#068DA9] text-white text-center">Stored Until</th>
+          <th class="bg-[#068DA9] text-white text-center">PIC</th>
+          <th class="bg-[#068DA9] text-white text-center">Section</th>
+          <th class="bg-[#068DA9] text-white text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="" *ngIf="!data.length; else show">
+          <td colspan="11" class="text-center bg-[#ECF8F9]">Belum ada data.</td>
+        </tr>
+        <ng-template #show>
+          <tr *ngFor="
+              let item of data
+                | filter : term
+                | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+            ">
+            <th class="bg-[#ECF8F9] text-center">{{ item.index }}</th>
+            <td class="bg-[#ECF8F9] text-center">{{ item.name }}</td>
+            <td class="bg-[#ECF8F9] text-center">{{ item.manufacture }}</td>
+            <td class="bg-[#ECF8F9] text-center">{{ item.lotNumber }}</td>
+            <td class="bg-[#ECF8F9] text-center">
+              {{ item.expiredDate | date }}
+            </td>
+            <td class="bg-[#ECF8F9] text-center">
+              {{ item.netStock | number }}
+            </td>
+            <td class="bg-[#ECF8F9] text-center">
+              {{
+                item.storage === "custom" ? item.customStorage : item.storage
+              }}
+            </td>
+            <td class="bg-[#ECF8F9] text-center">
+              {{ item.storedUntil | date }}
+            </td>
+            <td class="bg-[#ECF8F9] text-center">{{ item.pic }}</td>
+            <td class="bg-[#ECF8F9] text-center">{{ item.mstSection.name }}</td>
+            <td class="bg-[#ECF8F9] text-center">
+              <div class="flex items-center justify-center gap-3">
+                <div class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                  data-tip="Export to PDF">
+                  <label (click)="getDataModal(item.id)" for="my-modal-5"
+                    class="cursor-pointer active:bg-gray-300 active:text-black"><img src="assets/printer.png" alt=""
+                      style="
+                        min-height: 40px;
+                        min-width: 40px;
+                        max-width: 40px;
+                        max-height: 40px;
+                      " /></label>
+                </div>
+                <div class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                  data-tip="Transaction" *ngIf="isAllowed">
+                  <a routerLink="/material/{{ item.id }}" class="active:bg-gray-300 active:text-black">
+                    <img src="assets/info.png" style="
+                        min-height: 40px;
+                        min-width: 40px;
+                        max-width: 40px;
+                        max-height: 40px;
+                      " alt="" />
+                  </a>
+                </div>
+                <div class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                  data-tip="Edit" *ngIf="isAllowed">
+                  <a *ngIf="user.isEmployee" routerLink="/material/Update/{{ item.id }}"
+                    class="active:bg-gray-300 active:text-black">
+                    <img src="assets/edit.png" style="
+                        min-height: 40px;
+                        min-width: 40px;
+                        max-width: 40px;
+                        max-height: 40px;
+                      " alt="" />
+                  </a>
+                </div>
+                <div class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                  data-tip="Delete" *ngIf="isAllowed">
+                  <label *ngIf="user.isEmployee" (click)="getDataModal(item.id)" for="my-modal-4"
+                    class="cursor-pointer active:bg-gray-300 active:text-black"><img src="assets/delete.png" style="
+                        min-height: 40px;
+                        min-width: 40px;
+                        max-width: 40px;
+                        max-height: 40px;
+                      " alt="" /></label>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex items-center justify-center py-2 my-2 text-black bg-gray-200 rounded-lg">
+    <pagination-controls class="h-7" (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+  <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+  <label for="my-modal-4" class="cursor-pointer modal">
+    <label class="relative modal-box w-fit" for="">
+      <div class="flex justify-center">
+        <h2 class="card-title text-rose-600">
+          Alert
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            class="flex-shrink-0 w-6 h-6 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </h2>
+      </div>
+
+      <p class="py-4" *ngIf="dataModal">
+        Are you sure delete <strong>{{ dataModal.name }}</strong>?
+      </p>
+      <div class="flex items-center justify-center gap-2">
+        <label for="my-modal-4" class="btn bg-[#DF2E38] border-0 hover:bg-[#C21010]"
+          (click)="destroyData(dataModal.id)">Delete</label>
+        <label for="my-modal-4" class="btn bg-[#5D9C59] border-0 hover:bg-[#367E18]">Cancel</label>
+      </div>
+    </label>
+  </label>
+
+  <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+  <label for="my-modal-5" class="cursor-pointer modal">
+    <label class="relative modal-box w-fit" for="">
+      <div class="flex justify-center">
+        <h2 class="card-title text-[#7AA874]">
+          Export to PDF
+          <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" mirror-in-rtl="true">
+            <path fill="#7AA874"
+              d="M7.63 12.82a1 1 0 0 0 1.4.195 1.022 1.022 0 0 0 .4-.778v-.072A6.174 6.174 0 0 1 10.5 8.32a3.672 3.672 0 0 1 .71-.72l.612.812a.973.973 0 0 0 .96.362 1 1 0 0 0 .786-.7l1.394-4.8A1 1 0 0 0 14 2H9.007a1.048 1.048 0 0 0-.6.22 1.032 1.032 0 0 0-.293.358A.985.985 0 0 0 8.2 3.6l.612.812C7.092 5.708 5.95 10.44 7.63 12.82z" />
+            <path fill="#7AA874"
+              d="M18 8a.34.34 0 0 1-.01.1V17a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1l.01-9a1 1 0 1 1 2 0 .34.34 0 0 1-.01.1V16h13.99V8H16a1 1 0 1 1 2 0z" />
+          </svg>
+        </h2>
+      </div>
+
+      <p class="py-4" *ngIf="dataModal">
+        Are you sure print <strong>{{ dataModal.name }}</strong>?
+      </p>
+      <div class="flex items-center justify-center gap-2">
+        <!-- <label
+        for="my-modal-5"
+        class="btn bg-[#5D9C59] border-0 hover:bg-[#367E18]"
+        (click)="destroyData(dataModal.id)"
+        >Print</label
+      > -->
+        <a *ngIf="dataModal" routerLink="/material/template/{{ dataModal.id }}"
+          class="btn bg-[#5D9C59] border-0 hover:bg-[#367E18]">Export</a>
+        <label for="my-modal-5" class="btn bg-[#DF2E38] border-0 hover:bg-[#C21010]">Cancel</label>
+      </div>
+    </label>
+  </label>
+</ng-template>

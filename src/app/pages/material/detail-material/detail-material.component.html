@@ -1,0 +1,1308 @@
+<div
+  *ngIf="isLoading; else elseBlock"
+  class="flex items-center justify-center h-[80vh]"
+>
+  <div role="status">
+    <svg
+      aria-hidden="true"
+      class="inline w-20 h-20 mr-2 text-gray-200 animate-spin fill-blue-600"
+      viewBox="0 0 100 101"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+        fill="currentColor"
+      />
+      <path
+        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+        fill="currentFill"
+      />
+    </svg>
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div
+    class="alert {{ alertType }}  shadow-lg z-50 top-[40px] right-2 fixed w-fit"
+    *ngIf="alert"
+    (click)="resetAlert()"
+  >
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-shrink-0 w-6 h-6 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24"
+        *ngIf="alertType == 'alert-success'"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-shrink-0 w-6 h-6 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24"
+        *ngIf="alertType == 'alert-error'"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span>{{ alertMessage }}</span>
+    </div>
+  </div>
+
+  <a
+    routerLink="/material"
+    class="btn mb-3 bg-[#19376D] hover:bg-[#0B2447] border-0"
+  >
+    <svg
+      width="30px"
+      height="30px"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="Arrow / Chevron_Left">
+        <path
+          id="Vector"
+          d="M15 19L8 12L15 5"
+          stroke="#fff"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+    </svg>
+  </a>
+  <div class="flex items-center gap-3 max-lg:flex-wrap">
+    <div
+      class="w-full p-4 max-h-fit bg-[#ECF9FF] shadow-2xl border border-gray-200 rounded-lg max-lg:overflow-auto"
+    >
+      <h5 class="mb-4 text-2xl font-semibold text-center text-gray-900">
+        Description
+      </h5>
+      <table class="w-full">
+        <tbody class="text-start">
+          <tr class="border-b text-start">
+            <th
+              scope="row text-start"
+              class="px-6 py-[10px] font-semibold text-gray-900 whitespace-nowrap text-start"
+            >
+              Development Item
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.name }}</td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Manufacture
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.manufacture }}
+            </td>
+          </tr>
+          <tr class="border-b text-start md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Manufacture
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.manufacture }}</td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Origin
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.origin }}</td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Supplier
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.supplier }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Supplier
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.supplier }}</td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Lot Number
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.lotNumber }}</td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Expired Date
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.expiredDate | date }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Expired Date
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.expiredDate | date }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Usage
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.usage }}
+            </td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Quantity (Pack)
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.qty | number }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Quantity (Pack)
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.qty | number }}</td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Kg/pack
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.pcs | number }}</td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Initial Quantity (Kg)
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.totalQty | number }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Total Quantity (Kg)
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.totalQty | number }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Storage
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{
+                data.storage === "custom" ? data.customStorage : data.storage
+              }}
+            </td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Detail Storage
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.detailStorage }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Detail Storage
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.detailStorage }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Storage Temp Target
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.storageTempTarget }}
+            </td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Stored Until
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.storedUntil | date }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Stored Until
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.storedUntil | date }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              PIC
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">{{ data.pic }}</td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Section
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              {{ data.mstSection.name }}
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Section
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              {{ data.mstSection.name }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Supporting Document
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              <a
+                *ngIf="data.supportingDoc !== '-'"
+                href="{{ path }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                <img
+                  src="assets/doc.png"
+                  alt=""
+                  class="w-10 hover:-translate-y-0.5 active:translate-y-0 duration-300"
+                />
+              </a>
+              <span *ngIf="data.supportingDoc === '-'">-</span>
+            </td>
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap max-md:hidden"
+            >
+              Photo
+            </th>
+            <td class="px-6 py-[10px] text-start max-md:hidden">:</td>
+            <td class="px-6 py-[10px] text-start max-md:hidden">
+              <label for="my-modal-image">
+                <img
+                  src="https://myapps.aio.co.id/stock-opname-api//{{
+                    data.photo
+                  }}"
+                  width="40px"
+                  alt=""
+                  class="rounded-md active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer duration-300"
+                />
+                <img
+                  src="http://192.168.144.81:3121/{{ data.photo }}"
+                  width="40px"
+                  alt=""
+                  class="rounded-md active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer duration-300"
+                />
+              </label>
+            </td>
+          </tr>
+          <tr class="border-b md:hidden">
+            <th
+              scope="row"
+              class="px-6 py-[10px] text-start font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Photo
+            </th>
+            <td class="px-6 py-[10px] text-start">:</td>
+            <td class="px-6 py-[10px] text-start">
+              <label for="my-modal-image">
+                <img
+                  src="https://myapps.aio.co.id/stock-opname-api//{{
+                    data.photo
+                  }}"
+                  width="40px"
+                  alt=""
+                  class="rounded-md active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer duration-300"
+                />
+                <img
+                  src="http://192.168.144.81:3121/{{ data.photo }}"
+                  width="40px"
+                  alt=""
+                  class="rounded-md active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer duration-300"
+                />
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="w-full">
+      <div
+        class="justify-center mb-10 text-center shadow-lg alert alert-success"
+      >
+        <div>
+          <span class="font-bold text-center"
+            >Current NetStock : {{ data.netStock | number }}</span
+          >
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mb-5" *ngIf="user.isEmployee">
+        <label
+          *ngIf="user"
+          for="modal-edit"
+          class="btn capitalize bg-[#F45050] border-0 hover:bg-[#e03333]"
+          >Edit Description</label
+        >
+
+        <!-- Put this part before </body> tag -->
+        <input type="checkbox" id="modal-edit" class="modal-toggle" />
+        <label for="modal-edit" class="cursor-pointer modal">
+          <label class="relative max-w-4xl modal-box" for="">
+            <h3 class="mb-4 text-lg font-bold text-center">
+              Update {{ data.name }}
+            </h3>
+            <div class="py-4">
+              <form
+                [formGroup]="formUpdateMaster"
+                (submit)="submit()"
+                enctype="multipart/form-data"
+              >
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Name</label
+                    >
+                    <input
+                      [(ngModel)]="formUpdateMaster.value.name"
+                      type="text"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Name"
+                      formControlName="name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Batch / Lot Number</label
+                    >
+                    <input
+                      type="text"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Batch"
+                      formControlName="lotNumber"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Exp Date</label
+                    >
+                    <input
+                      type="date"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Batch"
+                      formControlName="expiredDate"
+                      [(ngModel)]="dateExpiredDate"
+                    />
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Manufacture</label
+                    >
+                    <input
+                      type="text"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Manufacture"
+                      formControlName="manufacture"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Origin</label
+                    >
+                    <input
+                      type="text"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Origin"
+                      formControlName="origin"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Supplier</label
+                    >
+                    <input
+                      type="text"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Supplier"
+                      formControlName="supplier"
+                    />
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Usage</label
+                    >
+                    <input
+                      type="text"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Usage"
+                      formControlName="usage"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Quantity (Pack)</label
+                    >
+                    <input
+                      type="number"
+                      min="0"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Quantity"
+                      formControlName="qty"
+                    />
+                    <p
+                      *ngIf="
+                        formUpdateMaster.value.qty *
+                          formUpdateMaster.value.pcs -
+                          totalConsume <=
+                        0
+                      "
+                      class="mt-1 text-xs italic text-red-500"
+                    >
+                      * Total consume transaction is greater than total qty
+                    </p>
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Kg / pack</label
+                    >
+                    <input
+                      type="number"
+                      min="0"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Kg"
+                      formControlName="pcs"
+                    />
+                    <p
+                      *ngIf="
+                        formUpdateMaster.value.qty *
+                          formUpdateMaster.value.pcs -
+                          totalConsume <=
+                        0
+                      "
+                      class="mt-1 text-xs italic text-red-500"
+                    >
+                      * Total consume transaction is greater than total qty
+                    </p>
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >PIC</label
+                    >
+                    <input
+                      type="text"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="PIC"
+                      formControlName="pic"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Email"
+                      formControlName="email"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Section</label
+                    >
+                    <select
+                      id="countries"
+                      formControlName="mstSectionId"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                      <option
+                        value="{{ item.id }}"
+                        *ngFor="let item of dataSection"
+                      >
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Storage</label
+                    >
+                    <select
+                      id="countries"
+                      formControlName="storage"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                      <option
+                        value="{{ item.name }}"
+                        *ngFor="let item of storages"
+                      >
+                        {{ item.name }}
+                      </option>
+                      <option value="custom">Other</option>
+                    </select>
+
+                    <input
+                      class="bg-gray-50 mt-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      formControlName="customStorage"
+                      placeholder="Custom storage"
+                      *ngIf="formUpdateMaster.value.storage === 'custom'"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Detail Storage</label
+                    >
+                    <input
+                      type="text"
+                      id="first_name"
+                      formControlName="detailStorage"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Detail Storage"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Stored Temp Target</label
+                    >
+                    <input
+                      type="text"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Stored Temp Target"
+                      formControlName="storageTempTarget"
+                    />
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Stored Until</label
+                    >
+                    <input
+                      type="date"
+                      id="first_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Stored Until"
+                      formControlName="storedUntil"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Photos</label
+                    >
+                    <img
+                      src="{{ previewImage }}"
+                      alt=""
+                      class="my-2 duration-300 rounded-md cursor-pointer active:bg-gray-300 active:text-black hover:shadow-xl {{
+                        !previewImage && 'hidden'
+                      }}"
+                    />
+                    <input
+                      type="file"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Usage"
+                      (change)="processPhoto($event)"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="last_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >Supporting Document</label
+                    >
+                    <a
+                      *ngIf="!supportingDoc"
+                      href="{{ previewDoc }}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mb-2 capitalize duration-300 rounded-md cursor-pointer btn btn-ghost active:bg-gray-300 active:text-black hover:shadow-xl"
+                      >preview Existing document</a
+                    >
+                    <input
+                      type="file"
+                      id="last_name"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      placeholder="Usage"
+                      (change)="processSupportingDoc($event)"
+                    />
+                  </div>
+                </div>
+                <div class="text-center">
+                  <label
+                    *ngIf="
+                      formUpdateMaster.value.qty * formUpdateMaster.value.pcs -
+                        totalConsume >
+                      0
+                    "
+                    for="modal-edit"
+                    (click)="submit()"
+                    type="submit"
+                    class="btn bg-[#19376D] border-0 hover:bg-[#0B2447] capitalize"
+                  >
+                    Update Data
+                  </label>
+                  <p
+                    *ngIf="
+                      formUpdateMaster.value.qty * formUpdateMaster.value.pcs -
+                        totalConsume <=
+                      0
+                    "
+                    class="btn bg-[#DF2E38] border-0 cursor-not-allowed hover:bg-[#E21818] capitalize"
+                  >
+                    Update Data
+                  </p>
+                </div>
+              </form>
+            </div>
+          </label>
+        </label>
+        <label
+          for="my-modal-4"
+          class="btn capitalize bg-[#F45050] border-0 hover:bg-[#e03333]"
+          >Create Transaction</label
+        >
+        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+        <label for="my-modal-4" class="cursor-pointer modal">
+          <label class="relative modal-box" for="">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold">Create New Transaction</h3>
+              <label for="my-modal-4" class="cursor-pointer">
+                <svg
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="Edit / Close_Circle">
+                    <path
+                      id="Vector"
+                      d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+                      stroke="#F45050"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </svg>
+              </label>
+            </div>
+            <form [formGroup]="form" class="pt-4 h-fit">
+              <div class="grid gap-2 mb-5 md:grid-cols-2">
+                <div>
+                  <label
+                    for="first_name"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Usage</label
+                  >
+                  <input
+                    type="text"
+                    id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Usage"
+                    formControlName="usage"
+                  />
+                </div>
+                <div>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">PIC Transaction</label>
+                  <input type="text" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Pic Transaction" formControlName="nameTr" />
+                </div>
+              </div>
+              <div class="grid gap-2 mb-5 md:grid-cols-2">
+                <div>
+                  <label
+                    for="first_name"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Transaction Date
+                  </label>
+                  <input
+                    type="date"
+                    id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Lot Number"
+                    formControlName="date"
+                    [(ngModel)]="date"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="last_name"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Consume (pcs)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    id="last_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 block w-full p-2.5 {{
+                      data.netStock < form.value.consume
+                        ? ' focus:ring-red-500 focus:border-red-500'
+                        : 'focus:ring-blue-500 focus:border-blue-500'
+                    }}"
+                    placeholder="Consume (pcs)"
+                    formControlName="consume"
+                    (input)="checkInput($event)"
+                  />
+                  <p class="mt-1 text-xs italic text-red-500" *ngIf="showWarning">
+                    * Jangan menambahkan operasi bilangan
+                  </p>
+                  <p
+                    class="mt-1 text-xs text-red-500"
+                    *ngIf="data.netStock < form.value.consume"
+                  >
+                    *jumlah consume melebihi net stock
+                  </p>
+                </div>
+              </div>
+              <div class="text-center py-3">
+                <label
+                  *ngIf="showWarning || data.netStock < form.value.consume; else otherOptions"
+                  class="px-52 py-3 mr-2 text-sm font-medium text-white bg-blue-300 rounded-lg cursor-not-allowed hover:bg-blue-300 focus:outline-none"
+                >
+                  Submit
+                </label>
+                <ng-template #otherOptions>
+                  <label
+                    for="my-modal-4"
+                    (click)="storeData()"
+                    class="px-52 py-3 mr-2 text-sm font-medium text-white bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900 focus:outline-none"
+                  >
+                    Submit
+                  </label>
+                </ng-template>
+              </div>
+            </form>
+          </label>
+        </label>
+      </div>
+      <div class="mb-2 font-medium">Search:</div>
+      <div class="relative mb-5">
+        <div
+          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-gray-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+        <input
+          type="text"
+          id="simple-search"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5 focus:ring-[#3F497F] focus:border-[#3F497F] focus:outline-none focus:ring-1"
+          placeholder="Search"
+          [(ngModel)]="term"
+        />
+      </div>
+
+      <div class="mb-2 font-medium">Filter by date:</div>
+      <form action="" [formGroup]="formFilter" (submit)="filterData()">
+        <div class="flex items-center mb-4">
+          <div class="relative w-full">
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5 text-gray-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#3E54AC] focus:border-[#3E54AC] block w-full pl-10 p-2.5 focus:outline-none focus:ring-1"
+              placeholder="Select date start"
+              formControlName="startDate"
+            />
+          </div>
+          <span class="mx-4 text-gray-500">to</span>
+          <div class="relative w-full">
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5 text-gray-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#3E54AC] focus:border-[#3E54AC] block w-full pl-10 p-2.5 focus:outline-none focus:ring-1"
+              placeholder="Select date end"
+              formControlName="endDate"
+            />
+          </div>
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="px-12 py-2 mb-2 mr-2 text-sm font-medium text-white bg-[#19376D] hover:bg-[#0B2447] rounded-lg focus:outline-none"
+          >
+            Filter Transaction
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="mt-4 two mb-7">
+    <h1>
+      List Transactions
+      <span>in {{ data.name }}</span>
+    </h1>
+  </div>
+  <div class="overflow-x-auto" *ngIf="dataTrMaterial.length">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th class="text-center bg-[#DEECFF]">No</th>
+          <th class="text-center bg-[#DEECFF]">PIC Transaction</th>
+          <th class="text-center bg-[#DEECFF]">Transaction Date</th>
+          <th class="text-center bg-[#DEECFF]">Usage</th>
+          <th class="text-center bg-[#DEECFF]">Consume (Pcs)</th>
+          <th class="text-center bg-[#DEECFF]" *ngIf="user.isEmployee">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of dataTrMaterial
+              | filter : term
+              | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+          "
+        >
+          <th class="bg-[#ECF9FF] text-center">{{ item.index }}</th>
+          <td class="text-center bg-[#ECF9FF]">{{ item.nameTr }} </td>
+          <td class="text-center bg-[#ECF9FF]">{{ item.date | date }}</td>
+          <td class="text-center bg-[#ECF9FF]">{{ item.usage }}</td>
+          <td class="text-center bg-[#ECF9FF]">{{ item.consume | number }}</td>
+          <td class="text-center bg-[#ECF9FF]" *ngIf="user.isEmployee">
+            <div class="flex items-center justify-center gap-3">
+              <div
+                class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                data-tip="Edit"
+              >
+                <label
+                  (click)="getDataModal(item.id)"
+                  for="my-modal-edit"
+                  class="rounded-full active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
+                >
+                  <img
+                    src="assets/edit.png"
+                    style="
+                      min-height: 40px;
+                      min-width: 40px;
+                      max-width: 40px;
+                      max-height: 40px;
+                    "
+                    alt=""
+                /></label>
+              </div>
+              <div
+                class="duration-300 rounded-full tooltip tooltip-top hover:-translate-y-1 hover:shadow-xl"
+                data-tip="Delete"
+              >
+                <label
+                  (click)="getDataModal(item.id)"
+                  for="my-modal-delete"
+                  class="rounded-full active:bg-gray-300 active:text-black hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
+                >
+                  <img
+                    src="assets/delete.png"
+                    style="
+                      min-height: 40px;
+                      min-width: 40px;
+                      max-width: 40px;
+                      max-height: 40px;
+                    "
+                    alt=""
+                  />
+                </label>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="flex items-center justify-center py-2 my-2 text-black bg-gray-200 rounded-lg"
+    >
+      <pagination-controls
+        class="h-7"
+        (pageChange)="p = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <div
+    class="min-h-[30vh] text-center flex justify-center items-center"
+    *ngIf="!dataTrMaterial.length"
+  >
+    <p class="text-2xl font-medium capitalize">no transaction data.</p>
+  </div>
+
+  <!-- Modal Edit -->
+  <input type="checkbox" id="my-modal-edit" class="modal-toggle" />
+  <label for="my-modal-edit" class="cursor-pointer modal">
+    <label class="relative modal-box" for="">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold">Update Transaction</h3>
+        <label for="my-modal-edit" class="cursor-pointer">
+          <svg
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="Edit / Close_Circle">
+              <path
+                id="Vector"
+                d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+                stroke="#F45050"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+          </svg>
+        </label>
+      </div>
+      <form [formGroup]="formUpdate" class="pt-4 h-fit" *ngIf="dataModal">
+        <div class="grid gap-2 mb-5 md:grid-cols-2">
+          <div>
+            <label
+              for="first_name"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Usage
+            </label>
+            <input
+              type="text"
+              id="first_name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Usage"
+              formControlName="usage"
+            />
+          </div>
+          <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">PIC Transaction</label>
+            <input type="text" id="first_name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="PIC Transaction" formControlName="nameTr" />
+          </div>
+        </div>
+        <div class="grid gap-2 mb-5 md:grid-cols-2">
+          <div>
+            <label
+              for="first_name"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Transaction Date
+            </label>
+            <input
+              type="date"
+              id="first_name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Lot Number"
+              formControlName="date"
+            />
+          </div>
+          <div>
+            <label
+              for="last_name"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Consume (pcs)
+            </label>
+            <input
+              type="number"
+              min="0"
+              id="last_name"
+              class="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-1 text-gray-900 text-sm rounded-lg  block w-full p-2.5 {{
+                data.netStock + dataModal.consume < formUpdate.value.consume
+                  ? ' focus:ring-red-500 focus:border-red-500'
+                  : 'focus:ring-blue-500 focus:border-blue-500'
+              }}"
+              placeholder="Consume (pcs)"
+              formControlName="consume"
+            />
+            <p
+              class="mt-1 text-xs text-red-500"
+              *ngIf="
+                data.netStock + dataModal.consume < formUpdate.value.consume
+              "
+            >
+              *jumlah consume melebihi net stock
+            </p>
+          </div>
+        </div>
+        <div class="text-center py-3">
+          <label
+            *ngIf="
+              data.netStock + dataModal.consume < formUpdate.value.consume;
+              else otherOption
+            "
+            class="px-12 py-2 mr-2 text-sm font-medium text-white bg-blue-300 rounded-lg cursor-not-allowed hover:bg-blue-300 focus:outline-none"
+          >
+            Submit
+          </label>
+          <ng-template #otherOption>
+            <label
+              for="my-modal-edit"
+              (click)="updateData()"
+              class="px-52 py-3 mr-2 text-sm font-medium text-white bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900 focus:outline-none"
+            >
+              Submit
+            </label>
+          </ng-template>
+        </div>
+      </form>
+    </label>
+  </label>
+
+  <!-- Modal Delete -->
+  <input type="checkbox" id="my-modal-delete" class="modal-toggle" />
+  <label for="my-modal-delete" class="cursor-pointer modal">
+    <label class="relative modal-box w-fit" for="">
+      <div class="flex justify-center">
+        <h2 class="card-title text-rose-600">
+          Alert
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="flex-shrink-0 w-6 h-6 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </h2>
+      </div>
+      <p *ngIf="dataModal" class="py-4">
+        Are you sure want to delete this transaction?
+      </p>
+      <div class="flex items-center justify-center gap-2">
+        <label
+          for="my-modal-delete"
+          class="btn bg-[#DF2E38] border-0 hover:bg-[#C21010]"
+          (click)="destroyData(dataModal.id)"
+          >Delete</label
+        >
+        <label
+          for="my-modal-delete"
+          class="btn bg-[#5D9C59] border-0 hover:bg-[#367E18]"
+          >Cancel</label
+        >
+      </div>
+    </label>
+  </label>
+
+  <input type="checkbox" id="my-modal-image" class="modal-toggle" />
+  <label for="my-modal-image" class="cursor-pointer modal">
+    <label class="relative modal-box min-w-fit" for="">
+      <div class="flex justify-center">
+        <h2 class="mb-4 card-title">Documentation</h2>
+      </div>
+
+      <img
+        src="https://myapps.aio.co.id/stock-opname-api//{{ data.photo }}"
+        alt=""
+        class="max-w-xl rounded-lg"
+      />
+      <img
+        src="http://192.168.144.81:3121//{{ data.photo }}"
+        alt=""
+        class="max-w-xl rounded-lg"
+      />
+    </label>
+  </label>
+</ng-template>

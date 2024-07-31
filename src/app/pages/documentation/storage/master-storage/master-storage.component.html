@@ -1,0 +1,189 @@
+<div
+  *ngIf="isLoading; else elseBlock"
+  class="flex items-center justify-center h-[80vh]"
+>
+  <div role="status">
+    <svg
+      aria-hidden="true"
+      class="inline w-20 h-20 mr-2 text-gray-200 animate-spin fill-blue-600"
+      viewBox="0 0 100 101"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+        fill="currentColor"
+      />
+      <path
+        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+        fill="currentFill"
+      />
+    </svg>
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div
+    class="fixed z-50 cursor-pointer right-1 top-10 w-fit alert alert-success"
+    *ngIf="showAlert"
+    (click)="showAlert = false"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-6 h-6 stroke-current shrink-0"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+    <span>{{ alertMessage }}</span>
+  </div>
+  <nav class="flex px-5 py-3 text-gray-700" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+      <li class="inline-flex items-center">
+        <a
+          routerLink="/documentation"
+          class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-[#146C94]"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4 5.5H9C10.1046 5.5 11 6.39543 11 7.5V16.5C11 17.0523 10.5523 17.5 10 17.5H4C3.44772 17.5 3 17.0523 3 16.5V6.5C3 5.94772 3.44772 5.5 4 5.5ZM14 19.5C13.6494 19.5 13.3128 19.4398 13 19.3293V19.5C13 20.0523 12.5523 20.5 12 20.5C11.4477 20.5 11 20.0523 11 19.5V19.3293C10.6872 19.4398 10.3506 19.5 10 19.5H4C2.34315 19.5 1 18.1569 1 16.5V6.5C1 4.84315 2.34315 3.5 4 3.5H9C10.1947 3.5 11.2671 4.02376 12 4.85418C12.7329 4.02376 13.8053 3.5 15 3.5H20C21.6569 3.5 23 4.84315 23 6.5V16.5C23 18.1569 21.6569 19.5 20 19.5H14ZM13 7.5V16.5C13 17.0523 13.4477 17.5 14 17.5H20C20.5523 17.5 21 17.0523 21 16.5V6.5C21 5.94772 20.5523 5.5 20 5.5H15C13.8954 5.5 13 6.39543 13 7.5ZM5 7.5H9V9.5H5V7.5ZM15 7.5H19V9.5H15V7.5ZM19 10.5H15V12.5H19V10.5ZM5 10.5H9V12.5H5V10.5ZM19 13.5H15V15.5H19V13.5ZM5 13.5H9V15.5H5V13.5Z"
+            />
+          </svg>
+          Documentation
+        </a>
+      </li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2"
+            >Storage</span
+          >
+        </div>
+      </li>
+    </ol>
+  </nav>
+  <div class="w-full overflow-x-auto">
+    <h1 class="mt-1 mb-6 text-3xl font-semibold text-center">
+      Documentation Master Data Storage
+    </h1>
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th class="bg-[#068DA9] text-center text-white">#</th>
+          <th class="bg-[#068DA9] text-center text-white">Name</th>
+          <th class="bg-[#068DA9] text-center text-white">Database</th>
+          <th class="bg-[#068DA9] text-center text-white">Method</th>
+          <th class="bg-[#068DA9] text-center text-white">EndPoint</th>
+          <th class="bg-[#068DA9] text-center text-white">Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <th class="bg-[#ECF8F9] text-center">{{ item.index }}</th>
+          <td class="bg-[#ECF8F9] text-center">{{ item.name }}</td>
+          <td class="bg-[#ECF8F9] text-center">{{ item.dbName }}</td>
+          <td class="bg-[#ECF8F9] text-center">
+            <span
+              class="m-1 font-semibold border-0 badge"
+              [ngClass]="{
+                'bg-green-200 text-green-700': item.method === 'GET',
+                'bg-yellow-200 text-yellow-700': item.method === 'POST',
+                'bg-blue-200 text-blue-700': item.method === 'PUT',
+                'bg-red-200 text-red-700': item.method === 'DELETE'
+              }"
+            >
+              {{ item.method }}
+            </span>
+          </td>
+          <td class="bg-[#ECF8F9] text-center">
+            <a
+              *ngIf="item.method === 'GET'; else elseBlock"
+              (click)="copyToClipboard(item.endPoint)"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cursor-pointer"
+              >{{ item.endPoint }}</a
+            >
+            <ng-template #elseBlock>
+              <a class="cursor-not-allowed select-none">{{ item.endPoint }}</a>
+            </ng-template>
+          </td>
+          <td class="bg-[#ECF8F9] text-center">
+            <label
+              for="my-modal-response"
+              (click)="getDataModal(item.id)"
+              class="btn btn-ghost"
+            >
+              <svg
+                class="w-6 h-6"
+                viewBox="0 -3 19 19"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <title>code [#1115]</title>
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g
+                  id="Page-1"
+                  stroke="none"
+                  stroke-width="1"
+                  fill="none"
+                  fill-rule="evenodd"
+                >
+                  <g
+                    id="Dribbble-Light-Preview"
+                    transform="translate(-180.000000, -3283.000000)"
+                    fill="#000000"
+                  >
+                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                      <path
+                        d="M129.204085,3126.419 C129.587463,3126.032 129.587463,3125.405 129.204085,3125.018 L129.191207,3125.005 C128.807829,3124.618 128.186697,3124.618 127.803319,3125.005 L124.287534,3128.553 C123.904155,3128.94 123.904155,3129.568 124.287534,3129.955 L127.803319,3133.503 C128.186697,3133.89 128.807829,3133.89 129.191207,3133.503 L129.204085,3133.49 C129.587463,3133.103 129.587463,3132.476 129.204085,3132.089 L127.090057,3129.955 C126.706679,3129.568 126.706679,3128.94 127.090057,3128.553 L129.204085,3126.419 Z M142.712466,3128.553 L139.196681,3125.005 C138.814294,3124.618 138.192171,3124.618 137.808793,3125.005 L137.795915,3125.018 C137.412537,3125.405 137.412537,3126.032 137.795915,3126.419 L139.910934,3128.553 C140.294312,3128.94 140.294312,3129.568 139.910934,3129.955 L137.795915,3132.089 C137.412537,3132.476 137.412537,3133.103 137.795915,3133.49 L137.808793,3133.503 C138.192171,3133.89 138.814294,3133.89 139.196681,3133.503 L142.712466,3129.955 C143.095845,3129.568 143.095845,3128.94 142.712466,3128.553 L142.712466,3128.553 Z M136.809359,3124.40817 L131.74698,3135.23866 C131.582981,3135.57915 131.295245,3136 130.924037,3136 L130.904396,3136 C130.182602,3136 129.712209,3135.0197 130.031369,3134.3588 L135.064287,3123.63077 C135.228287,3123.29128 135.836165,3123.02511 135.836165,3123.02511 L135.836165,3123 C136.818198,3123 137.127538,3123.74728 136.809359,3124.40817 L136.809359,3124.40817 Z"
+                        id="code-[#1115]"
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <input type="checkbox" id="my-modal-response" class="modal-toggle" />
+  <label for="my-modal-response" class="cursor-pointer modal">
+    <label class="relative max-w-4xl modal-box" for="">
+      <div class="mb-4 font-semibold text-center">Response API</div>
+      <ngx-json-viewer [json]="resultJson"></ngx-json-viewer>
+    </label>
+  </label>
+</ng-template>

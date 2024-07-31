@@ -1,0 +1,12 @@
+.active {
+  background-color: #ffd966;
+  box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+  -webkit-box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+}
+.mobileMode {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+  -webkit-box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 6px 9px 31px -10px rgba(0, 0, 0, 0.49);
+}

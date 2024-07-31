@@ -1,0 +1,20 @@
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-content {
+    visibility: visible;
+  }
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  /* Mengatur posisi horizontal ke tengah */
+  align-items: center;
+  /* Mengatur posisi vertikal ke tengah */
+  height: 100vh;
+  /* Sesuaikan tinggi agar konten tetap ditengah */
+}
+

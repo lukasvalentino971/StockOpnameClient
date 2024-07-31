@@ -1,0 +1,37 @@
+<app-navbar
+  *ngIf="
+    !(
+      router.url === '/auth' ||
+      router.url.includes('/fg/template/') ||
+      router.url.includes('/material/template/') ||
+      router.url.includes('/packaging/template/') ||
+      router.url.includes('/tools/template/') ||
+      router.url.includes('form')
+    )
+  "
+></app-navbar>
+<div
+  class="  {{
+    router.url.includes('/fg/template/') ||
+    router.url.includes('auth') ||
+    router.url.includes('/material/template/') ||
+    router.url.includes('/packaging/template/') ||
+    router.url.includes('/tools/template/')
+      ? 'bg-white min-h-screen'
+      : 'p-2'
+  }}"
+>
+  <router-outlet></router-outlet>
+</div>
+<app-footer
+  *ngIf="
+    !(
+      router.url === '/auth' ||
+      router.url.includes('/fg/template/') ||
+      router.url.includes('/material/template/') ||
+      router.url.includes('/packaging/template/') ||
+      router.url.includes('/tools/template/') ||
+      router.url.includes('form')
+    )
+  "
+></app-footer>

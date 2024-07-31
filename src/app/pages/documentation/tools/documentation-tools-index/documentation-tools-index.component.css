@@ -1,0 +1,9 @@
+.json-view {
+  font-family: monospace;
+  background-color: #f7fafc;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow: auto;
+  white-space: pre;
+  word-wrap: break-word;
+}

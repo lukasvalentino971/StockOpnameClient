@@ -1,0 +1,77 @@
+.customTitle h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  width: fit-content;
+  text-align: center;
+  margin: auto;
+  white-space: nowrap;
+  padding-bottom: 13px;
+}
+
+.customTitle h1:before {
+  background-color: #f45050;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 50px;
+  margin-bottom: 5px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+.customTitle h1:after {
+  background-color: #f45050;
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px;
+  margin-bottom: 0.25em;
+  animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+h1 {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: #080808;
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+h1 span {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.3;
+}
+
+h1 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

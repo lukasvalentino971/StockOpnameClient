@@ -1,0 +1,40 @@
+<div class="flex items-center justify-between">
+  <a routerLink="/storage">
+    <img
+      src="assets/back.png"
+      class="w-12 duration-200 active:scale-95"
+      alt=""
+    />
+  </a>
+  <div class="text-center one mb-7">
+    <h1>Create Storage</h1>
+  </div>
+  <div></div>
+</div>
+<form [formGroup]="form" (submit)="submit()">
+  <div class="w-full mb-5 md:w-2/5 sm:w-3/4">
+    <div>
+      <label
+        for="first_name"
+        class="block mb-2 text-sm font-medium text-gray-900"
+        >Name</label
+      >
+      <input
+        type="text"
+        id="first_name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        placeholder="Name"
+        formControlName="name"
+      />
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button
+      type="submit"
+      class="btn bg-[#19376D] border-0 hover:bg-[#0B2447] capitalize"
+    >
+      Create Data
+    </button>
+  </div>
+</form>
